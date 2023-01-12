@@ -1,7 +1,7 @@
 import { useState } from "react";
 import search from "./assets/search.svg";
 
-export default function Search(props: { onSearch: (search: string) => void }) {
+export const Search = (props: { onSearch: (search: string) => void }) => {
   const [text, setText] = useState("");
 
   return (
@@ -21,4 +21,4 @@ export default function Search(props: { onSearch: (search: string) => void }) {
       />
     </div>
   );
-}
+};

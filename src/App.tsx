@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { fetchRandomQuote, QuoteModel, searchQuote } from "./data/quotesApi";
+import { fetchRandomQuote, QuoteModel, searchQuotes } from "./data/quotesApi";
 import { LoadingSpinner } from "./LoadingSpinner";
-import Quote from "./Quote";
-import Search from "./Search";
+import { Quote } from "./Quote";
+import { Search } from "./Search";
 import { Show } from "./Show";
 
 function App() {
   const [randomQuote, setRandomQuote] = useState<QuoteModel | null>(null);
-  const [searchResult, setSearchResult] = useState<QuoteModel[]>([]);
-  const [currentText, setCurrentText] = useState("");
+  const [searchResults, setSearchResults] = useState<QuoteModel[]>([]);
   const [searchString, setSearchString] = useState("");
   const [status, setStatus] = useState<null | "loading" | "error">("loading");
 
@@ -20,11 +19,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (searchString === "") return setSearchResult([]);
+    if (searchString === "") return setSearchResults([]);
     setStatus("loading");
-    searchQuote(searchString)
+    searchQuotes(searchString)
       .then((qs) => {
-        setSearchResult(qs);
+        setSearchResults(qs);
         setStatus(null);
       })
       .catch(() => setStatus("error"));
@@ -56,11 +55,11 @@ function App() {
             }
           >
             <Show
-              when={searchResult.length > 0}
+              when={searchResults.length > 0}
               fallback={<div>No results</div>}
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {searchResult.map((quote) => (
+                {searchResults.map((quote) => (
                   <Quote key={quote._id} quote={quote} />
                 ))}
               </div>

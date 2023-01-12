@@ -18,7 +18,7 @@ export const fetchRandomQuote = async () => {
   return quote;
 };
 
-export const searchQuote = async (query: string) => {
+export const searchQuotes = async (query: string) => {
   const response = await fetch(
     `https://api.quotable.io/search/quotes?query=${encodeURIComponent(
       query
