@@ -7,5 +7,5 @@ export default defineConfig({
   build: {
     outDir: "docs",
   },
-  base: "/cs4610-assign1",
+  base: "./",
 });
